@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import spring.SpringBootCRUD.model.User;
 import spring.SpringBootCRUD.service.UserService;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/users")
@@ -33,7 +35,9 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("banks", List.of("T-bank", "Alpha-Bank", "SberBank"));
         return "new";
     }
 
@@ -49,6 +53,7 @@ public class UserController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.findOne(id));
+        model.addAttribute("banks", List.of("T-bank", "Alpha-Bank", "SberBank"));
         return "edit";
     }
 

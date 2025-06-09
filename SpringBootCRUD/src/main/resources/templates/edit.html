@@ -19,8 +19,10 @@
     <input type="text" th:field="*{age}" id="age"/>
     <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
     <br>
-    <label for="bank">Введите Ваш банк: </label>
-    <input type="text" th:field="*{bank}" id="bank"/>
+    <label for="bank">Выберите банк: </label>
+    <select th:field="*{bank}" id="bank">
+        <option th:each="b : ${banks}" th:value="${b}" th:text="${b}"></option>
+    </select>
     <div style="color:red" th:if="${#fields.hasErrors('bank')}" th:errors="*{bank}">Bank Error</div>
     <br>
     <input type="submit" value="Обновить"/>
